@@ -42,7 +42,7 @@ init_db()
 
 @app.get("/")
 def root():
-    return {"message": "hello aws sqlite"}
+    return {"message": "hello aws postgres"}
 
 
 @app.get("/users")
