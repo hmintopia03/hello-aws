@@ -67,9 +67,9 @@ resource "aws_instance" "hello" {
     Name = "hello-aws-terraform"
   }
 
-user_data_replace_on_change = true
+  user_data_replace_on_change = true
 
-user_data = <<-EOF
+  user_data = <<-EOF
 #!/bin/bash
 set -e
 
@@ -116,6 +116,19 @@ chown -R ubuntu:ubuntu /home/ubuntu/hello-aws
 EOF
 }
 
+resource "aws_eip" "hello_ip" {
+  domain = "vpc"
+
+  tags = {
+    Name = "hello-aws-eip"
+  }
+}
+
+resource "aws_eip_association" "hello_assoc" {
+  instance_id   = aws_instance.hello.id
+  allocation_id = aws_eip.hello_ip.id
+}
+
 output "public_ip" {
-  value = aws_instance.hello.public_ip
+  value = aws_eip.hello_ip.public_ip
 }
