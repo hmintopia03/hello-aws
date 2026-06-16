@@ -3,7 +3,7 @@
 A cloud deployment project demonstrating how to deploy a containerized FastAPI application on AWS using Terraform, Docker, Amazon RDS, Amazon S3, and GitHub Actions.
 
 ## Architecture
-
+```
 Internet
   ↓
 Nginx (EC2)
@@ -23,7 +23,7 @@ GitHub Actions
 SSH Deploy
   ↓
 EC2
-
+```
 Terraform provisions:
 - EC2
 - Elastic IP
