@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-northeast-2"
+  region = var.region
 }
 
 data "aws_ami" "ubuntu" {
@@ -56,8 +56,8 @@ resource "aws_security_group" "hello_sg" {
 
 resource "aws_instance" "hello" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
-  key_name      = "aws-key-2026"
+  instance_type = var.instance_type
+  key_name      = var.key_name
 
   vpc_security_group_ids = [
     aws_security_group.hello_sg.id
@@ -129,6 +129,3 @@ resource "aws_eip_association" "hello_assoc" {
   allocation_id = aws_eip.hello_ip.id
 }
 
-output "public_ip" {
-  value = aws_eip.hello_ip.public_ip
-}
