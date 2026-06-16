@@ -1,12 +1,17 @@
 from typing import Optional
 import sqlite3
-
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+import os
+import uuid
+import boto3
+from fastapi import UploadFile, File
 
 app = FastAPI()
 DB_NAME = "data/users.db"
 
+s3 = boto3.client("s3")
+S3_BUCKET = os.getenv("S3_BUCKET")
 
 class UserCreate(BaseModel):
     name: str
@@ -119,3 +124,20 @@ def delete_user(user_id: int):
     conn.close()
 
     return {"message": "user deleted", "user": user}
+
+
+@app.post("/upload")
+async def upload_file(file: UploadFile = File(...)):
+    file_key = f"uploads/{uuid.uuid4()}-{file.filename}"
+
+    s3.upload_fileobj(
+        file.file,
+        S3_BUCKET,
+        file_key,
+        ExtraArgs={"ContentType": file.content_type},
+    )
+
+    return {
+        "bucket": S3_BUCKET,
+        "key": file_key,
+    }

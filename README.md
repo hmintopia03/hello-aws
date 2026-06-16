@@ -1,35 +1,44 @@
 # Hello AWS
 
-A simple cloud deployment project demonstrating how to run a FastAPI application with PostgreSQL on AWS EC2 using Docker, Terraform, and GitHub Actions.
+A simple cloud deployment project demonstrating how to deploy a FastAPI application on AWS EC2 with Amazon RDS PostgreSQL, Terraform, Docker, and GitHub Actions.
 
 ## Architecture
 
-Internet → Nginx :80 → FastAPI :8000 → PostgreSQL
 
+Internet
+  ↓
+Nginx (EC2)
+  ↓
+FastAPI (Docker)
+  ↓
+RDS PostgreSQL
 
-```text
-Developer
-    ↓
-Git Push
-    ↓
 GitHub Actions
-    ↓
-EC2 (AWS)
-    ↓
-Docker Compose
- ├─ FastAPI
- └─ PostgreSQL
+  ↓
+SSH Deploy
+  ↓
+EC2
+
+Terraform
+  ├─ EC2
+  ├─ EIP
+  ├─ Security Group
+  ├─ IAM Role
+  └─ RDS
 ```
 
 ## Features
 
 * FastAPI backend
-* PostgreSQL database
+* Amazon RDS PostgreSQL
+* Nginx reverse proxy
 * Docker Compose deployment
 * Infrastructure as Code with Terraform
 * Elastic IP for stable public access
+* IAM Role for AWS service access
 * Automated deployment with GitHub Actions
 * Security Group configuration for SSH and HTTP access
+
 
 ## Tech Stack
 
@@ -93,6 +102,8 @@ Every push to the `main` branch triggers:
 * EC2 Instance
 * Security Group
 * Elastic IP
+* IAM Role and Instance Profile
+* Amazon RDS PostgreSQL
 * User Data bootstrap script
 
 ## Learning Goals
@@ -102,7 +113,9 @@ This project was created to practice:
 * AWS fundamentals
 * Infrastructure as Code
 * Containerized deployment
+* Reverse proxy configuration
 * CI/CD automation
+* Managed database integration
 * Cloud networking basics
 
 ```
