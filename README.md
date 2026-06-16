@@ -4,22 +4,13 @@ A cloud deployment project demonstrating how to deploy a containerized FastAPI a
 
 ## Architecture
 
-![Architecture](architecture.png)
-
-```text
 Internet
   ↓
 Nginx (EC2)
   ↓
 FastAPI (Docker)
-  ↓
-Amazon RDS PostgreSQL
-
-GitHub Actions
-  ↓
-SSH Deploy
-  ↓
-EC2
+  ↙      ↘
+RDS      S3
 
 FastAPI
   ↓
@@ -27,18 +18,29 @@ IAM Role
   ↓
 Amazon S3
 
-Terraform
-  ├─ EC2
-  ├─ Elastic IP
-  ├─ Security Group
-  ├─ IAM Role
-  ├─ Instance Profile
-  ├─ RDS PostgreSQL
-  └─ S3 Bucket
-```
+GitHub Actions
+  ↓
+SSH Deploy
+  ↓
+EC2
+
+Terraform provisions:
+- EC2
+- Elastic IP
+- Security Group
+- IAM Role
+- RDS PostgreSQL
+- S3 Bucket
+
 ## S3 Upload Demo
 
 ![S3 Upload Demo](s3-upload-demo.png)
+
+## CI/CD
+
+The application is automatically deployed to EC2 through GitHub Actions whenever changes are pushed to the `main` branch.
+
+![GitHub Actions Deployment](github-actions-deploy.png)
 
 ## Features
 
