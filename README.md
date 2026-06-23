@@ -187,31 +187,6 @@ DNS records are managed through Porkbun and point to the EC2 Elastic IP address.
 
 HTTPS is enabled using Let's Encrypt SSL certificates.
 
-## Monitoring
-
-The infrastructure is monitored using Amazon CloudWatch and Amazon SNS.
-
-### CloudWatch Alarm
-
-A CPU utilization alarm is configured for the EC2 instance.
-
-* Metric: CPUUtilization
-* Threshold: 80%
-* Evaluation Period: 2 minutes
-* Notification: Amazon SNS Email
-
-### Alarm Validation
-
-The monitoring setup was validated using a real load test.
-
-1. CPU load was generated on the EC2 instance using `yes > /dev/null`
-2. CloudWatch detected the CPU spike
-3. Alarm state changed from `OK` to `ALARM`
-4. SNS notification was triggered
-5. Alarm returned from `ALARM` to `OK` after load removal
-
-![CloudWatch Alarm Triggered](cloudwatch-alarm-triggered.png)
-
 
 ## Incident Lab
 
