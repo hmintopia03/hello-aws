@@ -3,113 +3,779 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hyemin Cho</title>
+  <meta name="description" content="Hyemin Cho, Platform Engineer portfolio focused on automation, observability, infrastructure as code, and reliability.">
+  <title>Hyemin Cho | Platform Engineer</title>
 
   <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --surface: #f7f8fa;
+      --surface-strong: #ffffff;
+      --text: #101114;
+      --muted: #4f5866;
+      --line: #e6e8ec;
+      --line-strong: #cfd4dc;
+      --accent: #0f766e;
+      --accent-soft: #e7f5f2;
+      --shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+      --max: 1120px;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0f1115;
+      --surface: #171a20;
+      --surface-strong: #12151b;
+      --text: #f4f6f8;
+      --muted: #b4bcc8;
+      --line: #252a33;
+      --line-strong: #3a414d;
+      --accent: #5eead4;
+      --accent-soft: #143631;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: system-ui, sans-serif;
-      background: #fafafa;
-      color: #111;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.6;
+      transition: background 180ms ease, color 180ms ease;
     }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 80px 24px;
-    }
-
-    h1 {
-      font-size: 4rem;
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      color: #666;
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-    }
-
-    .card {
-      background: white;
-      padding: 24px;
-      margin-bottom: 20px;
-      border-radius: 16px;
-      border: 1px solid #eee;
-    }
-
-    h2 {
-      margin-bottom: 12px;
-    }
-
-    ul {
-      padding-left: 20px;
+    p {
+      font-size: 1.02rem;
+      line-height: 1.72;
     }
 
     a {
-      color: black;
+      color: inherit;
       text-decoration: none;
-      font-weight: 600;
     }
 
     a:hover {
-      text-decoration: underline;
+      color: var(--accent);
+    }
+
+    .page {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      padding: 28px 24px 64px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 0 56px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand strong {
+      font-size: 0.95rem;
+      letter-spacing: 0;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: var(--surface-strong);
+      color: var(--text);
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.9rem;
+      transition: border 180ms ease, background 180ms ease, transform 180ms ease;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .toggle-mark {
+      width: 16px;
+      height: 16px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      box-shadow: inset -5px -5px 0 0 currentColor;
+    }
+
+    [data-theme="dark"] .toggle-mark {
+      box-shadow: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 56px;
+      align-items: end;
+      padding-bottom: 72px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    h1 {
+      max-width: 860px;
+      font-family: "IBM Plex Sans", Inter, "Helvetica Neue", Arial, ui-sans-serif, system-ui, sans-serif;
+      font-size: clamp(2.6rem, 6.6vw, 5.6rem);
+      font-weight: 780;
+      line-height: 0.98;
+      letter-spacing: 0;
+      font-variation-settings: "wght" 780;
+    }
+
+    .hero-copy {
+      max-width: 690px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid var(--text);
+      border-radius: 8px;
+      background: var(--text);
+      color: var(--bg);
+      font-weight: 700;
+      transition: transform 180ms ease, border 180ms ease, background 180ms ease;
+    }
+
+    .button:hover {
+      color: var(--bg);
+      transform: translateY(-1px);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--line-strong);
+    }
+
+    .button.secondary:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .profile-panel {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .profile-panel h2 {
+      margin-bottom: 14px;
+      font-size: 1.05rem;
+    }
+
+    .profile-panel p {
+      color: var(--muted);
+    }
+
+    .signal-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+      list-style: none;
+    }
+
+    .signal-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .signal-list strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    section {
+      padding: 72px 0 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .section-heading p {
+      max-width: 540px;
+      color: var(--muted);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 310px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-strong);
+      transition: border 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .project-card h3 {
+      font-size: 1.35rem;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .status {
+      flex: 0 0 auto;
+      padding: 5px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .project-card p {
+      color: var(--muted);
+    }
+
+    .project-card ul {
+      display: grid;
+      gap: 8px;
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .project-card li {
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .project-card li::before {
+      content: "";
+      position: absolute;
+      top: 0.72em;
+      left: 0;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 28px;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 13px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.86rem;
+      font-weight: 700;
+      transition: border 180ms ease, color 180ms ease, transform 180ms ease;
+    }
+
+    .card-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .tag {
+      padding: 6px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: var(--surface);
+      font-size: 0.8rem;
+      font-weight: 650;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .skill-group {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .skill-group h3 {
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    .skill-group p {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .contact h2 {
+      margin-bottom: 8px;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.1;
+    }
+
+    .contact p {
+      max-width: 620px;
+      color: var(--muted);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 40px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        padding: 22px 18px 48px;
+      }
+
+      .nav {
+        padding-bottom: 42px;
+      }
+
+      .nav-links a {
+        display: none;
+      }
+
+      .hero,
+      .project-grid,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        gap: 32px;
+        padding-bottom: 52px;
+      }
+
+      .section-heading {
+        display: grid;
+      }
+
+      .skills {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .brand span,
+      .theme-label {
+        display: none;
+      }
+
+      .theme-toggle {
+        width: 42px;
+        justify-content: center;
+        padding: 0;
+      }
+
+      h1 {
+        font-size: clamp(2.6rem, 17vw, 4.3rem);
+      }
+
+      .hero-actions,
+      .contact {
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .card-link {
+        flex: 1 1 130px;
+      }
+
+      .project-card {
+        min-height: auto;
+        padding: 22px;
+      }
+
+      .card-top {
+        display: grid;
+      }
+
+      .skills {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        display: grid;
+      }
     }
   </style>
 </head>
 <body>
-
-<div class="container">
-
-  <h1>Hyemin Cho</h1>
-
-  <p class="subtitle">
-    Platform Engineer · AWS · Docker · Terraform · FastAPI
-  </p>
-
-  <div class="card">
-    <h2>About</h2>
-    <p>
-      Building reliable backend and cloud infrastructure.
-      Interested in Platform Engineering, SRE, observability,
-      automation, and system reliability.
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>Projects</h2>
-    <ul>
-      <li>Hello AWS</li>
-      <li>Failure Playground</li>
-      <li>Mini Controller</li>
-      <li>WG Watcher</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h2>Tech Stack</h2>
-    <p>
-      AWS · Docker · Terraform · Linux · FastAPI · PostgreSQL · GitHub Actions
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>Contact</h2>
-    <p>
-      GitHub:
-      <a href="https://github.com/hmintopia03">
-        github.com/hmintopia03
+  <div class="page">
+    <header class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#">
+        <strong>Hyemin Cho</strong>
+        <span>Platform Engineer</span>
       </a>
-    </p>
+
+      <nav class="nav-links" aria-label="Portfolio sections">
+        <a href="#projects">Projects</a>
+        <a href="#stack">Stack</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+          <span class="toggle-mark" aria-hidden="true"></span>
+          <span class="theme-label">Dark</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="intro-title">
+        <div>
+          <p class="eyebrow">Cloud infrastructure and reliability</p>
+          <h1 id="intro-title">Platform Engineer.<br>Building reliable systems.</h1>
+          <p class="hero-copy">
+            I design AWS-based platform foundations with infrastructure as code,
+            automated delivery, observable runtimes, and recovery-minded operations.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#projects">View projects</a>
+            <a class="button secondary" href="https://github.com/hmintopia03">GitHub profile</a>
+          </div>
+        </div>
+
+        <aside class="profile-panel" aria-label="Portfolio highlights">
+          <h2>Current focus</h2>
+          <p>
+            Building platform capabilities around repeatable infrastructure, observable
+            runtimes, automated delivery, and recovery-minded operations.
+          </p>
+          <ul class="signal-list">
+            <li><span>Infrastructure</span><strong>Terraform on AWS</strong></li>
+            <li><span>Runtime</span><strong>Docker + Nginx</strong></li>
+            <li><span>Observability</span><strong>CloudWatch + SNS</strong></li>
+            <li><span>Delivery</span><strong>GitHub Actions</strong></li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <h2 id="projects-title">Selected projects</h2>
+          <p>
+            Hands-on platform work across infrastructure as code, deployment automation,
+            observability validation, failure analysis, and control-loop thinking.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="card-top">
+              <h3>Hello AWS</h3>
+              <span class="status">Featured</span>
+            </div>
+            <p>
+              AWS platform deployment proving infrastructure as code, container runtime
+              operations, managed data services, object storage, and automated releases.
+            </p>
+            <ul>
+              <li>Provisioned EC2, Elastic IP, security groups, IAM role, RDS, and S3.</li>
+              <li>Validated CloudWatch alarms and SNS notifications with incident drills.</li>
+              <li>Deployed updates through GitHub Actions over SSH.</li>
+            </ul>
+            <div class="tags" aria-label="Hello AWS technologies">
+              <span class="tag">AWS</span>
+              <span class="tag">Terraform</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">Docker</span>
+            </div>
+            <div class="card-actions" aria-label="Hello AWS links">
+              <a class="card-link" href="https://github.com/hmintopia03/aws">GitHub</a>
+              <a class="card-link" href="https://github.com/hmintopia03/aws/blob/main/architecture.png">Architecture</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="card-top">
+              <h3>Failure Playground</h3>
+              <span class="status">Reliability</span>
+            </div>
+            <p>
+              Reliability lab for practicing production-style failure modes, signal
+              collection, root-cause analysis, and documented recovery procedures.
+            </p>
+            <ul>
+              <li>Simulates service outages, 502 responses, and unhealthy containers.</li>
+              <li>Connects symptoms to logs, metrics, runtime state, and root cause.</li>
+              <li>Builds incident notes that make troubleshooting repeatable.</li>
+            </ul>
+            <div class="tags" aria-label="Failure Playground technologies">
+              <span class="tag">SRE</span>
+              <span class="tag">Linux</span>
+              <span class="tag">Nginx</span>
+              <span class="tag">Observability</span>
+            </div>
+            <div class="card-actions" aria-label="Failure Playground links">
+              <a class="card-link" href="https://github.com/hmintopia03/aws/tree/main/incident-lab">GitHub</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="card-top">
+              <h3>Mini Controller</h3>
+              <span class="status">Automation</span>
+            </div>
+            <p>
+              Controller-style automation project for exploring desired state,
+              reconciliation loops, and the operational patterns behind platform systems.
+            </p>
+            <ul>
+              <li>Models how controllers inspect state and converge toward intent.</li>
+              <li>Emphasizes clear state transitions and predictable operations.</li>
+              <li>Practices platform thinking beyond one-off scripts.</li>
+            </ul>
+            <div class="tags" aria-label="Mini Controller technologies">
+              <span class="tag">Controllers</span>
+              <span class="tag">Automation</span>
+              <span class="tag">Python</span>
+              <span class="tag">Systems</span>
+            </div>
+            <div class="card-actions" aria-label="Mini Controller links">
+              <a class="card-link" href="https://github.com/hmintopia03">GitHub</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="card-top">
+              <h3>WG Watcher</h3>
+              <span class="status">Operations</span>
+            </div>
+            <p>
+              Observability-oriented utility concept for watching WireGuard-style
+              operational state and surfacing connectivity signals before outages.
+            </p>
+            <ul>
+              <li>Focuses on visibility into connectivity, freshness, and service health.</li>
+              <li>Turns low-level runtime signals into concise operational feedback.</li>
+              <li>Supports the habit of observing systems continuously.</li>
+            </ul>
+            <div class="tags" aria-label="WG Watcher technologies">
+              <span class="tag">WireGuard</span>
+              <span class="tag">Monitoring</span>
+              <span class="tag">Networking</span>
+              <span class="tag">Ops</span>
+            </div>
+            <div class="card-actions" aria-label="WG Watcher links">
+              <a class="card-link" href="https://github.com/hmintopia03">GitHub</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="stack" aria-labelledby="stack-title">
+        <div class="section-heading">
+          <h2 id="stack-title">Platform stack</h2>
+          <p>
+            Tools I use to provision infrastructure, automate delivery, observe runtime
+            behavior, and validate reliability through practical failure exercises.
+          </p>
+        </div>
+
+        <div class="skills">
+          <div class="skill-group">
+            <h3>Cloud</h3>
+            <p>AWS EC2, RDS, S3, IAM, Elastic IP, security groups, CloudWatch, SNS.</p>
+          </div>
+          <div class="skill-group">
+            <h3>Infrastructure</h3>
+            <p>Terraform, Docker, Docker Compose, Nginx, Linux operations.</p>
+          </div>
+          <div class="skill-group">
+            <h3>Backend</h3>
+            <p>FastAPI, Python, PostgreSQL, REST APIs, application health checks.</p>
+          </div>
+          <div class="skill-group">
+            <h3>Delivery</h3>
+            <p>GitHub Actions, SSH deployment, alarm validation, incident notes.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-title">
+        <div class="contact">
+          <div>
+            <h2 id="contact-title">Building reliable platforms, one feedback loop at a time.</h2>
+            <p>
+              I focus on platform engineering, infrastructure as code, automation,
+              observability, and the operational details that make reliability measurable.
+            </p>
+          </div>
+          <a class="button" href="https://github.com/hmintopia03">github.com/hmintopia03</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Hyemin Cho</span>
+      <span>Platform Engineer · AWS · Terraform · Docker · Observability</span>
+    </footer>
   </div>
 
-</div>
+  <script>
+    const root = document.documentElement;
+    const toggle = document.querySelector(".theme-toggle");
+    const label = document.querySelector(".theme-label");
+    const savedTheme = localStorage.getItem("theme");
 
+    function applyTheme(theme) {
+      root.dataset.theme = theme;
+      toggle.setAttribute("aria-pressed", String(theme === "dark"));
+      if (label) {
+        label.textContent = theme === "dark" ? "Light" : "Dark";
+      }
+    }
+
+    applyTheme(savedTheme || "light");
+
+    toggle.addEventListener("click", () => {
+      const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+      localStorage.setItem("theme", nextTheme);
+      applyTheme(nextTheme);
+    });
+  </script>
 </body>
 </html>
