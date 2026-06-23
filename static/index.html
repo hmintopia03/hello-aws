@@ -1,41 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Hyemin Cho</title>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hyemin Cho</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #fafafa;
+      color: #111;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: white;
+      padding: 24px;
+      margin-bottom: 20px;
+      border-radius: 16px;
+      border: 1px solid #eee;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    a {
+      color: black;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
+
+<div class="container">
+
   <h1>Hyemin Cho</h1>
 
-  <p>Platform Engineer</p>
-
-  <h2>Projects</h2>
-
-  <ul>
-    <li>
-      <a href="https://github.com/hmintopia03/failure-playground">
-        Failure Playground
-      </a>
-    </li>
-
-    <li>
-      <a href="https://github.com/hmintopia03/mini-controller">
-        Mini Controller
-      </a>
-    </li>
-
-    <li>
-      <a href="https://github.com/hmintopia03/hello-aws">
-        Hello AWS
-      </a>
-    </li>
-  </ul>
-
-  <p>
-    <a href="https://github.com/hmintopia03">
-      GitHub Profile
-    </a>
+  <p class="subtitle">
+    Platform Engineer · AWS · Docker · Terraform · FastAPI
   </p>
+
+  <div class="card">
+    <h2>About</h2>
+    <p>
+      Building reliable backend and cloud infrastructure.
+      Interested in Platform Engineering, SRE, observability,
+      automation, and system reliability.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Projects</h2>
+    <ul>
+      <li>Hello AWS</li>
+      <li>Failure Playground</li>
+      <li>Mini Controller</li>
+      <li>WG Watcher</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Tech Stack</h2>
+    <p>
+      AWS · Docker · Terraform · Linux · FastAPI · PostgreSQL · GitHub Actions
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Contact</h2>
+    <p>
+      GitHub:
+      <a href="https://github.com/hmintopia03">
+        github.com/hmintopia03
+      </a>
+    </p>
+  </div>
+
+</div>
 
 </body>
 </html>
