@@ -1,6 +1,10 @@
 # Hello AWS
 
-A cloud deployment project demonstrating how to deploy a containerized FastAPI application on AWS using Terraform, Docker, Amazon RDS, Amazon S3, and GitHub Actions.
+A cloud deployment project demonstrating how to deploy a containerized FastAPI application on AWS using Terraform, Docker, Amazon RDS, Amazon S3, GitHub Actions, and CloudWatch.
+
+The project provisions infrastructure with Terraform, deploys application containers on EC2, stores application data in Amazon RDS, uploads files to Amazon S3 using IAM Roles, and automatically deploys updates through GitHub Actions.
+
+The goal of the project is to gain hands-on experience with cloud infrastructure, infrastructure as code, CI/CD, monitoring, and AWS service integration.
 
 ## Architecture
 ```
@@ -122,6 +126,32 @@ Every push to the `main` branch automatically:
 3. Rebuilds Docker images
 4. Restarts application containers
 
+
+## Monitoring
+
+The application infrastructure is monitored using Amazon CloudWatch and Amazon SNS.
+
+### CloudWatch Alarm
+
+A CPU utilization alarm is configured for the EC2 instance:
+
+* Metric: CPUUtilization
+* Threshold: 80%
+* Evaluation Period: 2 minutes
+* Notification: Amazon SNS Email
+
+### Alarm Validation
+
+The monitoring setup was validated using a real load test.
+
+1. CPU load was generated on the EC2 instance using `yes > /dev/null`
+2. CloudWatch detected the CPU spike
+3. Alarm state changed from `OK` to `ALARM`
+4. SNS notification was triggered
+5. Alarm returned from `ALARM` to `OK` after load removal
+
+![CloudWatch Alarm Triggered](cloudwatch-alarm-triggered.png)
+
 ## S3 File Upload
 
 Upload a file:
@@ -143,19 +173,14 @@ Files are uploaded using EC2 IAM Role credentials.
 
 No AWS access keys are stored in the application.
 
-## Learning Goals
+## Lessons Learned
 
-This project was created to practice:
-
-* AWS fundamentals
-* Infrastructure as Code
-* Containerized deployment
-* Reverse proxy configuration
-* Managed database integration
-* IAM Role authentication
-* CI/CD automation
-* Cloud networking basics
-* AWS service integration
+* Infrastructure resources can become difficult to manage without Infrastructure as Code.
+* IAM Roles provide a safer authentication mechanism than storing AWS access keys inside applications.
+* Monitoring systems should be validated with real workload generation rather than configuration alone.
+* CloudWatch alarms can accidentally target obsolete EC2 instances after infrastructure changes.
+* Docker container state and application source code can diverge during deployment and troubleshooting.
+* GitHub Actions simplifies deployments but deployment logs remain critical for debugging failures.
 
 ```
 ```
