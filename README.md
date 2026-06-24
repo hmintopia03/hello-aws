@@ -10,6 +10,8 @@ The goal of the project is to gain hands-on experience with cloud infrastructure
 ```
 Internet
   ↓
+Domain (hyemincho.dev)
+  ↓
 Nginx (EC2)
   ↓
 FastAPI (Docker)
@@ -18,9 +20,15 @@ RDS      S3
 
 FastAPI
   ↓
-IAM Role
+Docker Logs
   ↓
-Amazon S3
+CloudWatch Logs
+
+EC2
+  ↓
+CloudWatch Alarm
+  ↓
+SNS
 
 GitHub Actions
   ↓
@@ -140,6 +148,15 @@ A CPU utilization alarm is configured for the EC2 instance:
 * Evaluation Period: 2 minutes
 * Notification: Amazon SNS Email
 
+### CloudWatch Logs
+
+Application logs are collected from Docker containers and shipped to CloudWatch Logs.
+
+Log Group:
+
+```text
+/hello-aws/fastapi
+```
 ### Incident Simulation
 
 A production-like incident was intentionally created by stopping the FastAPI container behind Nginx.
@@ -204,14 +221,20 @@ incident-lab/01-nginx-502.md
 
 This incident documents a production outage caused by an Nginx reverse proxy configuration issue and the debugging process used to identify and resolve the problem.
 
-## Lessons Learned
+## What I Learned
 
-* Infrastructure resources can become difficult to manage without Infrastructure as Code.
-* IAM Roles provide a safer authentication mechanism than storing AWS access keys inside applications.
-* Monitoring systems should be validated with real workload generation rather than configuration alone.
-* CloudWatch alarms can accidentally target obsolete EC2 instances after infrastructure changes.
-* Docker container state and application source code can diverge during deployment and troubleshooting.
-* GitHub Actions simplifies deployments but deployment logs remain critical for debugging failures.
+This project covers:
 
+- EC2 provisioning with Terraform
+- Docker Compose deployment
+- Nginx reverse proxy configuration
+- HTTPS with Let's Encrypt
+- Domain configuration
+- GitHub Actions CI/CD
+- CloudWatch monitoring
+- CloudWatch log aggregation
+- Incident investigation and troubleshooting
+
+The project was built to practice real-world infrastructure operation and debugging workflows rather than application feature development.
 ```
 ```
