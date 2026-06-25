@@ -139,14 +139,16 @@ Every push to the `main` branch automatically:
 
 The application infrastructure is monitored using Amazon CloudWatch and Amazon SNS.
 
-### CloudWatch Alarm
+### CloudWatch Dashboard
 
-A CPU utilization alarm is configured for the EC2 instance:
+The dashboard provides real-time visibility into the EC2 instance by visualizing:
 
-* Metric: CPUUtilization
-* Threshold: 80%
-* Evaluation Period: 2 minutes
-* Notification: Amazon SNS Email
+- CPU Utilization
+- Memory Usage
+- Disk Usage
+- Network Traffic
+
+![CloudWatch Dashboard](cloudwatch-dashboard.png)
 
 ### CloudWatch Logs
 
@@ -157,6 +159,17 @@ Log Group:
 ```text
 /hello-aws/fastapi
 ```
+
+### CloudWatch Alarm
+
+A CPU utilization alarm is configured for the EC2 instance:
+
+* Metric: CPUUtilization
+* Threshold: 80%
+* Evaluation Period: 2 minutes
+* Notification: Amazon SNS Email
+
+
 ### Incident Simulation
 
 A production-like incident was intentionally created by stopping the FastAPI container behind Nginx.
